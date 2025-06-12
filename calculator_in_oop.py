@@ -8,19 +8,21 @@ class Operation(ABC):
 
 class AdditionOperation(Operation):
     def calculate(self, first_operand, second_operand):
-        pass
+        return first_operand + second_operand
 
 class SubtractionOperation(Operation):
     def calculate(self, first_operand, second_operand):
-        pass
+        return first_operand - second_operand
 
 class MultiplicationOperation(Operation):
     def calculate(self, first_operand, second_operand):
-        pass
+        return first_operand * second_operand
 
 class DivisionOperation(Operation):
     def calculate(self, first_operand, second_operand):
-        pass
+        if second_operand == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        return first_operand / second_operand
 
 class CalculatorEngine:
     pass
