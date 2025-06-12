@@ -77,7 +77,8 @@ class CalculatorApp(tkinter.Tk):
         for row_index, row in enumerate(self.button_values):
             for column_index, value in enumerate(row):
                 button = tkinter.Button(self.frame, text=value, font=("Arial", 30),
-                                         width=4, height=1)
+                                         width=4, height=1,
+                                         command=lambda v=value: self.on_button_click(v))
                 if value in ["AC", "+/-", "%"]:
                     button.config(foreground=self.color_black, background=self.color_light_gray)
                 elif value in ["÷", "×", "-", "+", "="]:
@@ -88,6 +89,9 @@ class CalculatorApp(tkinter.Tk):
                 button.grid(row=row_index+1, column=column_index)
 
         self.frame.pack()
+
+    def on_button_click(self, button_value):
+        print("Button pressed:", button_value)
 
 if __name__ == "__main__":
     app = CalculatorApp()
