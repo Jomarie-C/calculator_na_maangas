@@ -146,8 +146,11 @@ class CalculatorApp(tkinter.Tk):
 
         elif button_value == "=":
             second_operand = float(self.current_input)
-            result = self.engine.calculate_result(second_operand)
-            self.current_input = self.format_result(result)
+            try:
+                result = self.engine.calculate_result(second_operand)
+                self.current_input = self.format_result(result)
+            except ZeroDivisionError:
+                self.current_input = "Error"
             self.label.config(text=self.current_input)
             self.engine.is_new_input = True
 
