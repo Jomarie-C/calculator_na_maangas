@@ -67,8 +67,10 @@ class CalculatorApp(tkinter.Tk):
             ["0", ".", "√", "="]
         ]
 
+        self.current_input = "0"
+
         self.frame = tkinter.Frame(self)
-        self.label = tkinter.Label(self.frame, text="0", font=("Arial", 45),
+        self.label = tkinter.Label(self.frame, text=self.current_input, font=("Arial", 45),
                                    background=self.color_black,
                                    foreground=self.color_white,
                                    anchor="e", width=4)
@@ -91,7 +93,17 @@ class CalculatorApp(tkinter.Tk):
         self.frame.pack()
 
     def on_button_click(self, button_value):
-        print("Button pressed:", button_value)
+        if button_value in "0123456789":
+            if self.current_input == "0":
+                self.current_input = button_value
+            else:
+                self.current_input += button_value
+            self.label.config(text=self.current_input)
+
+        elif button_value == ".":
+            if "." not in self.current_input:
+                self.current_input += "."
+                self.label.config(text=self.current_input)
 
 if __name__ == "__main__":
     app = CalculatorApp()
