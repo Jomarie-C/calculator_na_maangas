@@ -117,6 +117,14 @@ class CalculatorApp(tkinter.Tk):
                     self.current_input = "-" + self.current_input
             self.label.config(text=self.current_input)
 
+        elif button_value == "%":
+            value = float(self.current_input) / 100
+            if value.is_integer():
+                self.current_input = str(int(value))
+            else:
+                self.current_input = str(value)
+            self.label.config(text=self.current_input)
+
 if __name__ == "__main__":
     app = CalculatorApp()
     app.mainloop()
