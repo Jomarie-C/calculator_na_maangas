@@ -68,6 +68,7 @@ class CalculatorApp(tkinter.Tk):
         ]
 
         self.current_input = "0"
+        self.engine = CalculatorEngine()
 
         self.frame = tkinter.Frame(self)
         self.label = tkinter.Label(self.frame, text=self.current_input, font=("Arial", 45),
@@ -94,8 +95,9 @@ class CalculatorApp(tkinter.Tk):
 
     def on_button_click(self, button_value):
         if button_value in "0123456789":
-            if self.current_input == "0":
+            if self.current_input == "0" or self.engine.is_new_input:
                 self.current_input = button_value
+                self.engine.is_new_input = False
             else:
                 self.current_input += button_value
             self.label.config(text=self.current_input)
@@ -107,6 +109,7 @@ class CalculatorApp(tkinter.Tk):
 
         elif button_value == "AC":
             self.current_input = "0"
+            self.engine.clear()
             self.label.config(text=self.current_input)
 
         elif button_value == "+/-":
@@ -124,6 +127,19 @@ class CalculatorApp(tkinter.Tk):
             else:
                 self.current_input = str(value)
             self.label.config(text=self.current_input)
+
+        elif button_value in ["+", "-", "×", "÷"]:
+            self.engine.first_operand = float(self.current_input)
+            self.engine.is_new_input = True
+
+            if button_value == "+":
+                self.engine.set_operation(AdditionOperation())
+            elif button_value == "-":
+                self.engine.set_operation(SubtractionOperation())
+            elif button_value == "×":
+                self.engine.set_operation(MultiplicationOperation())
+            elif button_value == "÷":
+                self.engine.set_operation(DivisionOperation())
 
 if __name__ == "__main__":
     app = CalculatorApp()
