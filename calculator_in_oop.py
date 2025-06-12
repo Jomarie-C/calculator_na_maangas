@@ -59,12 +59,34 @@ class CalculatorApp(tkinter.Tk):
         self.color_orange = "#FF9500"
         self.color_white = "white"
 
+        self.button_values = [
+            ["AC", "+/-", "%", "÷"], 
+            ["7", "8", "9", "×"], 
+            ["4", "5", "6", "-"],
+            ["1", "2", "3", "+"],
+            ["0", ".", "√", "="]
+        ]
+
         self.frame = tkinter.Frame(self)
         self.label = tkinter.Label(self.frame, text="0", font=("Arial", 45),
                                    background=self.color_black,
                                    foreground=self.color_white,
                                    anchor="e", width=4)
         self.label.grid(row=0, column=0, columnspan=4, sticky="we")
+
+        for row_index, row in enumerate(self.button_values):
+            for column_index, value in enumerate(row):
+                button = tkinter.Button(self.frame, text=value, font=("Arial", 30),
+                                         width=4, height=1)
+                if value in ["AC", "+/-", "%"]:
+                    button.config(foreground=self.color_black, background=self.color_light_gray)
+                elif value in ["÷", "×", "-", "+", "="]:
+                    button.config(foreground=self.color_white, background=self.color_orange)
+                else:
+                    button.config(foreground=self.color_white, background=self.color_dark_gray)
+
+                button.grid(row=row_index+1, column=column_index)
+
         self.frame.pack()
 
 if __name__ == "__main__":
