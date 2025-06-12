@@ -51,6 +51,21 @@ class CalculatorApp(tkinter.Tk):
     def __init__(self):
         super().__init__()
         self.title("OOP Calculator")
+        self.resizable(False, False)
+
+        self.color_light_gray = "#D4D4D2"
+        self.color_black = "#1C1C1C"
+        self.color_dark_gray = "#505050"
+        self.color_orange = "#FF9500"
+        self.color_white = "white"
+
+        self.frame = tkinter.Frame(self)
+        self.label = tkinter.Label(self.frame, text="0", font=("Arial", 45),
+                                   background=self.color_black,
+                                   foreground=self.color_white,
+                                   anchor="e", width=4)
+        self.label.grid(row=0, column=0, columnspan=4, sticky="we")
+        self.frame.pack()
 
 if __name__ == "__main__":
     app = CalculatorApp()
