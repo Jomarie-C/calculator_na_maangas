@@ -141,6 +141,16 @@ class CalculatorApp(tkinter.Tk):
             elif button_value == "÷":
                 self.engine.set_operation(DivisionOperation())
 
+        elif button_value == "=":
+            second_operand = float(self.current_input)
+            result = self.engine.calculate_result(second_operand)
+            if result.is_integer():
+                self.current_input = str(int(result))
+            else:
+                self.current_input = str(result)
+            self.label.config(text=self.current_input)
+            self.engine.is_new_input = True
+
 if __name__ == "__main__":
     app = CalculatorApp()
     app.mainloop()
