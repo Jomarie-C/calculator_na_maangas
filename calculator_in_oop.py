@@ -94,6 +94,8 @@ class CalculatorApp(tkinter.Tk):
 
         self.frame.pack()
 
+        self.center_window()
+
     def format_result(self, value):
         if isinstance(value, float) and value.is_integer():
             return str(int(value))
@@ -163,6 +165,16 @@ class CalculatorApp(tkinter.Tk):
                 self.current_input = self.format_result(result)
             self.label.config(text=self.current_input)
             self.engine.is_new_input = True
+
+    def center_window(self):
+        self.update()
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        window_x = int((screen_width / 2) - (window_width / 2))
+        window_y = int((screen_height / 2) - (window_height / 2))
+        self.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
 
 if __name__ == "__main__":
     app = CalculatorApp()
