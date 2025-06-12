@@ -25,7 +25,27 @@ class DivisionOperation(Operation):
         return first_operand / second_operand
 
 class CalculatorEngine:
-    pass
+    def __init__(self):
+        self.first_operand = 0.0
+        self.second_operand = 0.0
+        self.current_operation = None
+        self.is_new_input = True
+
+    def set_operation(self, operation_instance):
+        self.current_operation = operation_instance
+
+    def calculate_result(self, second_operand):
+        if self.current_operation is None:
+            return second_operand
+        result = self.current_operation.calculate(self.first_operand, second_operand)
+        self.clear()
+        return result
+
+    def clear(self):
+        self.first_operand = 0.0
+        self.second_operand = 0.0
+        self.current_operation = None
+        self.is_new_input = True
 
 class CalculatorApp(tkinter.Tk):
     def __init__(self):
