@@ -94,6 +94,11 @@ class CalculatorApp(tkinter.Tk):
 
         self.frame.pack()
 
+    def format_result(self, value):
+        if isinstance(value, float) and value.is_integer():
+            return str(int(value))
+        return str(value)
+
     def on_button_click(self, button_value):
         if button_value in "0123456789":
             if self.current_input == "0" or self.engine.is_new_input:
@@ -123,10 +128,7 @@ class CalculatorApp(tkinter.Tk):
 
         elif button_value == "%":
             value = float(self.current_input) / 100
-            if value.is_integer():
-                self.current_input = str(int(value))
-            else:
-                self.current_input = str(value)
+            self.current_input = self.format_result(value)
             self.label.config(text=self.current_input)
 
         elif button_value in ["+", "-", "×", "÷"]:
@@ -145,10 +147,7 @@ class CalculatorApp(tkinter.Tk):
         elif button_value == "=":
             second_operand = float(self.current_input)
             result = self.engine.calculate_result(second_operand)
-            if result.is_integer():
-                self.current_input = str(int(result))
-            else:
-                self.current_input = str(result)
+            self.current_input = self.format_result(result)
             self.label.config(text=self.current_input)
             self.engine.is_new_input = True
 
@@ -158,10 +157,7 @@ class CalculatorApp(tkinter.Tk):
                 self.current_input = "Error"
             else:
                 result = math.sqrt(number)
-                if result.is_integer():
-                    self.current_input = str(int(result))
-                else:
-                    self.current_input = str(result)
+                self.current_input = self.format_result(result)
             self.label.config(text=self.current_input)
             self.engine.is_new_input = True
 
