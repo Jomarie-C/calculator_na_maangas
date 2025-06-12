@@ -1,5 +1,6 @@
 import tkinter
 from abc import ABC, abstractmethod
+import math
 
 class Operation(ABC):
     @abstractmethod
@@ -148,6 +149,19 @@ class CalculatorApp(tkinter.Tk):
                 self.current_input = str(int(result))
             else:
                 self.current_input = str(result)
+            self.label.config(text=self.current_input)
+            self.engine.is_new_input = True
+
+        elif button_value == "√":
+            number = float(self.current_input)
+            if number < 0:
+                self.current_input = "Error"
+            else:
+                result = math.sqrt(number)
+                if result.is_integer():
+                    self.current_input = str(int(result))
+                else:
+                    self.current_input = str(result)
             self.label.config(text=self.current_input)
             self.engine.is_new_input = True
 
