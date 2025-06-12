@@ -105,6 +105,18 @@ class CalculatorApp(tkinter.Tk):
                 self.current_input += "."
                 self.label.config(text=self.current_input)
 
+        elif button_value == "AC":
+            self.current_input = "0"
+            self.label.config(text=self.current_input)
+
+        elif button_value == "+/-":
+            if self.current_input.startswith("-"):
+                self.current_input = self.current_input[1:]
+            else:
+                if self.current_input != "0":
+                    self.current_input = "-" + self.current_input
+            self.label.config(text=self.current_input)
+
 if __name__ == "__main__":
     app = CalculatorApp()
     app.mainloop()
